@@ -121,7 +121,7 @@
     if self.cfg.style == "targettarget" then
       f.num = 8
     else
-      f.num = cfg.units.party.auras.number
+      f.num = self.cfg.auras.number
     end
     f:SetHeight((f.size+5)*(f.num/9))
     f:SetWidth((f.size+5)*4)
@@ -139,7 +139,7 @@
     if self.cfg.style == "targettarget" then
       f.num = 8
     else
-      f.num = cfg.units.party.auras.number
+      f.num = self.cfg.auras.number
     end
     f:SetHeight((f.size+5)*(f.num/9))
     f:SetWidth((f.size+5)*9)
@@ -479,10 +479,15 @@ end
 
     local back = CreateFrame("Frame",nil,self)
     back:SetSize(self.cfg.width,self.cfg.width)
-	if cfg.units.party.vertical == false then
+	
+	if self.cfg.style == "party" then
+		if cfg.units.party.vertical == false then
+			back:SetPoint("BOTTOM", self, "TOP", 0, -35)
+		else
+			back:SetPoint("BOTTOM", self, "LEFT", 10, -38)
+		end
+	else 
 		back:SetPoint("BOTTOM", self, "TOP", 0, -35)
-	else
-		back:SetPoint("BOTTOM", self, "LEFT", 10, -38)
 	end
     self.PortraitHolder = back
 
@@ -492,45 +497,88 @@ end
     t:SetVertexColor(0.1,0.1,0.1,0.9)
     self.PortraitBack = t
 
-    if self.cfg.portrait.use3D then
-      self.Portrait = CreateFrame("PlayerModel", nil, back)
-      self.Portrait:SetPoint("TOPLEFT",back,"TOPLEFT",27,-27)
-      self.Portrait:SetPoint("BOTTOMRIGHT",back,"BOTTOMRIGHT",-27,27)
+	if self.cfg.style == "party" then
+		if self.cfg.portrait.use3D then
+			self.Portrait = CreateFrame("PlayerModel", nil, back)
+			self.Portrait:SetPoint("TOPLEFT",back,"TOPLEFT",27,-27)
+			self.Portrait:SetPoint("BOTTOMRIGHT",back,"BOTTOMRIGHT",-27,27)
 
-      local borderholder = CreateFrame("Frame", nil, self.Portrait)
-      borderholder:SetAllPoints(back)
-      self.BorderHolder = borderholder
+			local borderholder = CreateFrame("Frame", nil, self.Portrait)
+				borderholder:SetAllPoints(back)
+				self.BorderHolder = borderholder
 
-      local border = borderholder:CreateTexture(nil,"BACKGROUND",nil,-6)
-      border:SetAllPoints(borderholder)
-      border:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\portrait_border")
-      border:SetVertexColor(0.6,0.5,0.5)
-      --border:SetVertexColor(1,0,0,1) --threat test
-      self.Border = border
+			local border = borderholder:CreateTexture(nil,"BACKGROUND",nil,-6)
+				border:SetAllPoints(borderholder)
+				border:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\portrait_border")
+				border:SetVertexColor(0.6,0.5,0.5)
+				--border:SetVertexColor(1,0,0,1) --threat test
+				self.Border = border
 
-      local gloss = borderholder:CreateTexture(nil,"BACKGROUND",nil,-5)
-      gloss:SetAllPoints(borderholder)
-      gloss:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\portrait_gloss")
-      gloss:SetVertexColor(0.9,0.95,1,0.6)
+			local gloss = borderholder:CreateTexture(nil,"BACKGROUND",nil,-5)
+				gloss:SetAllPoints(borderholder)
+				gloss:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\portrait_gloss")
+				gloss:SetVertexColor(0.9,0.95,1,0.6)
 
-    else
-      self.Portrait = back:CreateTexture(nil,"BACKGROUND",nil,-7)
-      self.Portrait:SetPoint("TOPLEFT",back,"TOPLEFT",21,-21)
-      self.Portrait:SetPoint("BOTTOMRIGHT",back,"BOTTOMRIGHT",-21,21)
-      self.Portrait:SetTexCoord(0.15,0.85,0.15,0.85)
+		else
+			self.Portrait = back:CreateTexture(nil,"BACKGROUND",nil,-7)
+			self.Portrait:SetPoint("TOPLEFT",back,"TOPLEFT",21,-21)
+			self.Portrait:SetPoint("BOTTOMRIGHT",back,"BOTTOMRIGHT",-21,21)
+			self.Portrait:SetTexCoord(0.15,0.85,0.15,0.85)
 
-      local border = back:CreateTexture(nil,"BACKGROUND",nil,-6)
-      border:SetAllPoints(back)
-      border:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\portrait_border")
-      border:SetVertexColor(0.6,0.5,0.5)
-      self.Border = border
+			local border = back:CreateTexture(nil,"BACKGROUND",nil,-6)
+				border:SetAllPoints(back)
+				border:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\portrait_border")
+				border:SetVertexColor(0.6,0.5,0.5)
+				self.Border = border
 
-      local gloss = back:CreateTexture(nil,"BACKGROUND",nil,-5)
-      gloss:SetAllPoints(back)
-      gloss:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\portrait_gloss")
-      gloss:SetVertexColor(0.9,0.95,1,0.6)
+			local gloss = back:CreateTexture(nil,"BACKGROUND",nil,-5)
+				gloss:SetAllPoints(back)
+				gloss:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\portrait_gloss")
+				gloss:SetVertexColor(0.9,0.95,1,0.6)
 
-    end
+		end
+	else
+		if self.cfg.portrait.use3D then
+			self.Portrait = CreateFrame("PlayerModel", nil, back)
+			self.Portrait:SetPoint("TOPLEFT",back,"TOPLEFT",27,-27)
+			self.Portrait:SetPoint("BOTTOMRIGHT",back,"BOTTOMRIGHT",-27,27)
+
+			local borderholder = CreateFrame("Frame", nil, self.Portrait)
+				borderholder:SetAllPoints(back)
+				self.BorderHolder = borderholder
+
+			local border = borderholder:CreateTexture(nil,"BACKGROUND",nil,-6)
+				border:SetAllPoints(borderholder)
+				border:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\portrait_border")
+				border:SetVertexColor(0.6,0.5,0.5)
+				--border:SetVertexColor(1,0,0,1) --threat test
+				self.Border = border
+
+			local gloss = borderholder:CreateTexture(nil,"BACKGROUND",nil,-5)
+				gloss:SetAllPoints(borderholder)
+				gloss:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\portrait_gloss")
+				gloss:SetVertexColor(0.9,0.95,1,0.6)
+
+		else
+			self.Portrait = back:CreateTexture(nil,"BACKGROUND",nil,-7)
+			self.Portrait:SetPoint("TOPLEFT",back,"TOPLEFT",27,-27)
+			self.Portrait:SetPoint("BOTTOMRIGHT",back,"BOTTOMRIGHT",-27,27)
+			self.Portrait:SetTexCoord(0.15,0.85,0.15,0.85)
+
+			local border = back:CreateTexture(nil,"BACKGROUND",nil,-6)
+				border:SetAllPoints(back)
+				border:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\portrait_border")
+				border:SetVertexColor(0.6,0.5,0.5)
+				self.Border = border
+
+			local gloss = back:CreateTexture(nil,"BACKGROUND",nil,-5)
+				gloss:SetAllPoints(back)
+				gloss:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\portrait_gloss")
+				gloss:SetVertexColor(0.9,0.95,1,0.6)
+
+		end	
+	end
+		
 	if self.cfg.vertical == true then
     self.Name:SetPoint("CENTER", 0, 0)
 	else

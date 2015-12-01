@@ -96,7 +96,7 @@
 
   --power value
   oUF.Tags.Methods["diablo:ppval"] = function(unit)
-    local ppval = func.numFormat(UnitPower(unit) or 0).." / "..oUF.Tags.Methods["perpp"](unit).."%"
+    local ppval = func.numFormat(UnitPower(unit) or 0).." / "..oUF.Tags.Methods["maxspp"](unit)
     return ppval or ""
   end
   oUF.Tags.Events["diablo:ppval"] = "UNIT_POWER UNIT_MAXPOWER"

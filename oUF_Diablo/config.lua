@@ -5,7 +5,7 @@
 
   --  A Diablo themed unitframe layout for oUF 1.6.x
   --  Galaxy - 2015
-  --  Verion 1.3
+  --  Version 1.3b
 
   ---------------------------------------------
 
@@ -60,7 +60,7 @@
         show = true,
         smooth = true,
       },
-	     healprediction = { --WIP - Not yet ready for Implementation
+	  healprediction = { --WIP - Not yet ready for Implementation
         show = false,
         color = {
           myself  = {r = 0, g = 1, b = 0, a = 1 },
@@ -270,7 +270,7 @@
     frequentUpdates = true,
         texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar256_3",
         tag = "[perhp]%",
-		fontSize = 7,
+		fontSize =10,
 		point = "CENTER",
 		x = 0,
 		y = 0,
@@ -278,14 +278,23 @@
       power = {
 	frequentUpdates = true,
         texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar",
-        tag = "[perpp]%", --more tags see oUF/elements/tags.lua | example: "[curpp] / [perpp]%" or "[diablo:ppval]"
-		fontSize = 10,
+        tag = "[diablo:ppval]", --more tags see oUF/elements/tags.lua | example: "[curpp] / [perpp]%" or "[diablo:ppval]"
+		fontSize = 7,
 		point = "LEFT",
 		x = -20,
 		y = 20,
       },
+	  powper = {
+		texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar",
+		tag = "[perpp]%",
+		fontSize = 7,
+		point = "CENTER",
+		x = 0,
+		y = -11,
+	  },
 	  misc = {
 		classFontSize = 13,
+		NameFontSize = 16,
 	  },
       auras = {
         show = true,
@@ -324,7 +333,7 @@
       portrait = {
         pos = { a1 = "CENTER", a2 = "CENTER", af = "UIParent", x = 100, y = 0 },
         size = 75,
-        show = true,
+        show = false,
         use3D = false,
       },
       healprediction = {
@@ -401,7 +410,7 @@
       },
       portrait = {
         show = true,
-        use3D = false,
+        use3D = true,
       },
       castbar = {
         show = false,
@@ -565,7 +574,7 @@
 	  },
       portrait = {
         show = true,
-        use3D = false,
+        use3D = true,
 		width = 100,
       },
       attributes = {
@@ -603,7 +612,7 @@
       alpha = {
         notinrange = 1,
       },
-      scale = 1.01,
+      scale = 1.2,
       pos = { a1 = "TOPLEFT", a2 = "TOPLEFT", af = "UIParent", x = 5, y = -5 },
       health = {
         texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar128_3",

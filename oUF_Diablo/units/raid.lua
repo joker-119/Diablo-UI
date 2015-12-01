@@ -483,4 +483,22 @@
       end
       groups[i] = group
     end
+	
+	local updateRaidScale = CreateFrame("Frame")
+    updateRaidScale:RegisterEvent("GROUP_ROSTER_UPDATE")
+    updateRaidScale:RegisterEvent("PLAYER_ENTERING_WORLD")
+    updateRaidScale:SetScript("OnEvent", function(self)
+      if(InCombatLockdown()) then
+        self:RegisterEvent("PLAYER_REGEN_ENABLED")
+      else
+        self:UnregisterEvent("PLAYER_REGEN_ENABLED")
+        local num = GetNumGroupMembers()
+        local scale = (100-num)/100*cfg.units.raid.scale
+        for idx, group in pairs(groups) do
+          if group then
+            group:SetScale(scale)
+          end
+        end
+      end
+    end)    
   end

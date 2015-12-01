@@ -20,7 +20,7 @@
 
   --init parameters
   local initUnitParameters = function(self)
-    self:SetFrameStrata("TOOLTIP")
+    self:SetFrameStrata("MEDIUM")
     self:SetFrameLevel(1)
     self:SetSize(self.cfg.width, self.cfg.height)
     self:SetScale(self.cfg.scale)
@@ -132,7 +132,7 @@
   --create health power strings
   local createHealthPowerStrings = function(self)
 
-    local name = func.createFontString(self, cfg.font, 16, "THINOUTLINE")
+    local name = func.createFontString(self, cfg.font, self.cfg.misc.NameFontSize, "THINOUTLINE")
     name:SetPoint("BOTTOM", self, "TOP", 0, 0)
     name:SetPoint("LEFT", self.Health, 0, 0)
     name:SetPoint("RIGHT", self.Health, 0, 0)
@@ -144,8 +144,11 @@
     local perphp = func.createFontString(self.Health, cfg.font, self.cfg.healper.fontSize, "THINOUTLINE") 
     perphp:SetPoint(self.cfg.healper.point, self.cfg.healper.x,self.cfg.healper.y)    
 
-    local perpp = func.createFontString(self.Health, cfg.font, self.cfg.power.fontSize, "THINOUTLINE")
-    perpp:SetPoint(self.cfg.power.point, self.cfg.power.x,self.cfg.power.y)
+    local perpp = func.createFontString(self.Health, cfg.font, self.cfg.powper.fontSize, "THINOUTLINE")
+    perpp:SetPoint(self.cfg.powper.point, self.cfg.powper.x,self.cfg.powper.y)
+	
+	local ppval = func.createFontString(self.Health, cfg.font, self.cfg.power.fontSize, "THINOUTLINE")
+	ppval:SetPoint(self.cfg.power.point, self.cfg.power.x,self.cfg.power.y)
 
     local classtext = func.createFontString(self, cfg.font, self.cfg.misc.classFontSize, "THINOUTLINE")
     classtext:SetPoint("BOTTOM", self, "TOP", 0, -15)
@@ -153,7 +156,8 @@
     self:Tag(name, "[diablo:name]")
     self:Tag(hpval, self.cfg.health.tag or "")
     self:Tag(perphp, self.cfg.healper.tag or "")
-    self:Tag(perpp, self.cfg.power.tag or "")
+    self:Tag(perpp, self.cfg.powper.tag or "")
+	self:Tag(ppval, self.cfg.power.tag or "")
     self:Tag(classtext, "[diablo:classtext]")
 
   end
