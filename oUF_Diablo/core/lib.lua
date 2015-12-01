@@ -121,7 +121,7 @@
     if self.cfg.style == "targettarget" then
       f.num = 8
     else
-      f.num = self.cfg.auras.number
+      f.num = cfg.units.party.auras.number
     end
     f:SetHeight((f.size+5)*(f.num/9))
     f:SetWidth((f.size+5)*4)
@@ -139,7 +139,7 @@
     if self.cfg.style == "targettarget" then
       f.num = 8
     else
-      f.num = self.cfg.auras.number
+      f.num = cfg.units.party.auras.number
     end
     f:SetHeight((f.size+5)*(f.num/9))
     f:SetWidth((f.size+5)*9)
