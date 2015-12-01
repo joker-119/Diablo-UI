@@ -226,7 +226,7 @@
         actionbarbackground = {
           show = true,
           pos = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 1, y = 0 },
-          scale = 1.5,
+          scale = 1.2,
         },
         angel = {
           show = true,
