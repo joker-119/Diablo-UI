@@ -121,7 +121,7 @@
     if self.cfg.style == "targettarget" then
       f.num = 8
     else
-      f.num = self.cfg.auras.number
+      f.num = cfg.units.party.auras.number
     end
     f:SetHeight((f.size+5)*(f.num/9))
     f:SetWidth((f.size+5)*4)
@@ -139,7 +139,7 @@
     if self.cfg.style == "targettarget" then
       f.num = 8
     else
-      f.num = self.cfg.auras.number
+      f.num = cfg.units.party.auras.number
     end
     f:SetHeight((f.size+5)*(f.num/9))
     f:SetWidth((f.size+5)*9)
@@ -173,14 +173,14 @@
     --button:SetSize(icons.size,icons.size)
     --button.cd:SetReverse()
     local size = icons.size or button:GetWidth()
-	button.cd:SetFrameStrata("TOOLTIP")
+	button.cd:SetFrameStrata("MEDIUM")
     button.cd:SetPoint("TOPLEFT", 1, -1)
     button.cd:SetPoint("BOTTOMRIGHT", -1, 1)
     button.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
     --count helper frame, this push the count fontstring over the cooldown spiral
     button.countFrame = CreateFrame("Frame",nil,button)
     button.countFrame:SetAllPoints()
-	button.countFrame:SetFrameStrata("TOOLTIP")
+	button.countFrame:SetFrameStrata("MEDIUM")
     button.countFrame:SetFrameLevel(button.cd:GetFrameLevel()+2)
     --button count
     button.count:SetParent(button.countFrame)
@@ -396,8 +396,7 @@ end
     if not color then color = { r = 0.5, g = 0.5, b = 0.5, } end
     --dead
     if dead == 1 then
-      bar:SetStatusBarColor(0,0,0,0)
-      bar.bg:SetVertexColor(0,0,0,0)
+      
     else
       --alive
       if cfg.colorswitcher.useBrightForeground then
@@ -409,7 +408,7 @@ end
       end
     end
     --low hp
-    if d <= 25 and dead ~= 1 then
+    if d <= 25 or dead == 1 then
       bar.highlight:SetAlpha(0)
       if cfg.colorswitcher.useBrightForeground then
         bar.glow:SetVertexColor(1,0,0,0.6)

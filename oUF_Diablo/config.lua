@@ -5,7 +5,7 @@
 
   --  A Diablo themed unitframe layout for oUF 1.6.x
   --  Galaxy - 2015
-  --  Version 1.3b
+  --  Version 1.4.0
 
   ---------------------------------------------
 
@@ -31,7 +31,7 @@
     classcolored        = true,  -- true   -> override the bright color with the unit specific color (class, faction, happiness, threat), if false uses the predefined color
     useBrightForeground = true,  -- true   -> use bright color in foreground and dark color in background
                                  -- false  -> use dark color in foreground and bright color in background
-    threatColored       = false,  -- true/false -> enable threat coloring of the health plate for raidframes
+    threatColored       = true,  -- true/false -> enable threat coloring of the health plate for raidframes
   }
 
   --frames have a new highlight that fades on hp loss, if that is still not enough you can adjust a multiplier here
@@ -60,13 +60,13 @@
         show = true,
         smooth = true,
       },
-	  healprediction = { --WIP - Not yet ready for Implementation
+      healprediction = { -- WIP, Not yet ready for implementation
         show = false,
         color = {
           myself  = {r = 0, g = 1, b = 0, a = 1 },
           other   = {r = 0, g = 1, b = 0, a = 0.7 },
         },
-	  },
+      },
       icons = {
         pvp = {
           show = true,
@@ -85,11 +85,11 @@
         show = true,
 		TextSize = 11,
         hideDefault = true, --if you hide the oUF_Diablo castbar, should the Blizzard castbar be shown?
-        latency = false,
+        latency = true,
         texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar256_2",
         scale = 1/1, --divide 1 by current unit scale if you want to prevent scaling of the castbar based on unit scale
         color = {
-          bar = { r = 0, g = 1, b = 0, a = 1, },
+          bar = { r = 1, g = 0.7, b = 0, a = 1, },
           bg = { r = 0.1, g = 0.1, b = 0.1, a = 0.7, },
         },
         pos = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 180.5 },
@@ -133,7 +133,7 @@
       holypower = { --class bar PALADIN
         show = true,
         scale = 0.40,
-        color = {r = 255/255, g = 133/255, b = 0/255, },
+        color = {r = 200/255, g = 135/255, b = 190/255, },
         pos = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 650 },
         combat          = { --fade the bar in/out in combat/out of combat
           enable          = false,
@@ -260,31 +260,23 @@
       health = {
 	frequentUpdates = true,
         texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar256_3",
-        tag = "[diablo:hpval]", 
+        tag = "[diablo:hpval]",
 		fontSize = 7,
 		point = "RIGHT",
 		x = 25,
 		y = 20,
       },
-	   healper = {
-    frequentUpdates = true,
-        texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar256_3",
-        tag = "[perhp]%",
-		fontSize =10,
+	  healper = {
+	frequentUpdates = true,
+		texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar256_3",
+		tag = "[perphp]",
+		fontSize = 10,
 		point = "CENTER",
 		x = 0,
 		y = 0,
-      },
-      power = {
-	frequentUpdates = true,
-        texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar",
-        tag = "[diablo:ppval]", --more tags see oUF/elements/tags.lua | example: "[curpp] / [perpp]%" or "[diablo:ppval]"
-		fontSize = 7,
-		point = "LEFT",
-		x = -20,
-		y = 20,
-      },
+	  },
 	  powper = {
+	frequentUpdates = true,
 		texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar",
 		tag = "[perpp]%",
 		fontSize = 7,
@@ -292,6 +284,15 @@
 		x = 0,
 		y = -11,
 	  },
+      power = {
+	frequentUpdates = true,
+        texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar",
+        tag = "[diablo:ppval]",
+		fontSize = 7,
+		point = "LEFT",
+		x = -20,
+		y = 20,
+      },
 	  misc = {
 		classFontSize = 13,
 		NameFontSize = 16,
@@ -301,7 +302,7 @@
         size = 15,
         onlyShowPlayerBuffs = false,
         showStealableBuffs = true,
-        onlyShowPlayerDebuffs = true,
+        onlyShowPlayerDebuffs = false,
         showDebuffType = true,
         desaturateDebuffs = false,
         buffs = {
@@ -323,7 +324,7 @@
         texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar256_2",
         scale = 1/1.5, --divide 1 by current unit scale if you want to prevent scaling of the castbar based on unit scale
         color = {
-          bar = { r = 0, g = 1, b = 0, a = 1, },
+          bar = { r = 1, g = 0.7, b = 0, a = 1, },
           bg = { r = 0.1, g = 0.1, b = 0.1, a = 0.7, },
           shieldbar = { r = 0.5, g = 0.5, b = 0.5, a = 1, }, --the castbar color while target casting a shielded spell
           shieldbg = { r = 0.1, g = 0.1, b = 0.1, a = 0.7, },  --the castbar background color while target casting a shielded spell
@@ -332,9 +333,9 @@
       },
       portrait = {
         pos = { a1 = "CENTER", a2 = "CENTER", af = "UIParent", x = 100, y = 0 },
-        size = 75,
+        size = 150,
         show = false,
-        use3D = false,
+        use3D = true,
       },
       healprediction = {
         show = true,
@@ -360,14 +361,14 @@
       scale = 1.3,
       pos = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = -195, y = 250 },
       auras = {
-        show = false,
+        show = true,
         size = 22,
         onlyShowPlayerDebuffs = false,
         showDebuffType = false,
       },
       health = {
         texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar128_3",
-        
+        tag = "[diablo:misshp]",
       },
       power = {
         texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar",
@@ -396,7 +397,7 @@
       },
       health = {
         texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar128_3",
-        
+        tag = "[diablo:misshp]",
       },
       power = {
         texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar",
@@ -442,7 +443,7 @@
         size            = 20,
       },
       auras = {
-        show = false,
+        show = true,
         size = 22,
         onlyShowPlayerDebuffs = false,
         showDebuffType = false,
@@ -452,13 +453,14 @@
       },
       health = {
         texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar128_3",
+        tag = "[diablo:misshp]",
       },
       power = {
         texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar",
       },
       portrait = {
-        show = false,
-        use3D = false,
+        show = true,
+        use3D = true,
       },
       castbar = {
         show = true,
@@ -502,6 +504,7 @@
       },
       health = {
         texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar128_3",
+        tag = "[diablo:misshp]",
       },
       power = {
         texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar",
@@ -525,6 +528,7 @@
       },
       health = {
         texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar128_3",
+        tag = "[diablo:misshp]",
       },
       power = {
         texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar128_3",
@@ -537,13 +541,13 @@
 
     --PARTY
     party = {
-      vertical = true,
+	  vertical = true,
       show = true,
       alpha = {
-        notinrange = 1,
+        notinrange = 0.5,
       },
-      scale = 1.0,
-      pos = { a1 = "TOPLEFT", a2 = "TOPLEFT", af = "UIParent", x = 5, y = -77 },
+      scale = 1.1,
+      pos = { a1 = "TOPLEFT", a2 = "BOTTOMLEFT", af = "UIParent", x = 5, y = -7 },
       aurawatch = {
         show            = false,
         size            = 18,
@@ -555,12 +559,12 @@
         showDebuffType = true,
         showBuffs = true,
         onlyShowPlayerBuffs = true,
-		showBuffType = false,
-		number = 15,
+		showBuffType = true,
+		number = 12,
       },
       health = {
         texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar128_3",
---		tag = "[diablo:misshp]",	--Uncomment this line to enable missing hp (or other health values) on party health bars
+        tag = "[diablo:misshp]",
 		fontSize = 11,
 		point = "RIGHT",
 		x = -3,
@@ -570,7 +574,7 @@
         texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar",
       },
 	  misc = {
-		NameFontSize = 14,
+		NameFontSize = 14
 	  },
       portrait = {
         show = true,
@@ -583,7 +587,6 @@
         showSolo            = false,    --make this true to show while solo (only works if solo is in visiblity aswell
         showParty           = true,     --make this true to show headerin party
         showRaid            = false,    --show in raid
-        point               = "LEFT",
       },
       healprediction = {
         show = true,
@@ -610,12 +613,13 @@
         chains = false, --should the raidframe include the chain textures?
       },
       alpha = {
-        notinrange = 1,
+        notinrange = 0.4,
       },
       scale = 1.2,
       pos = { a1 = "TOPLEFT", a2 = "TOPLEFT", af = "UIParent", x = 5, y = -5 },
       health = {
         texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar128_3",
+        tag = "[diablo:misshp]",   --tag for the second line
       },
       power = {
         texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar",
@@ -654,7 +658,7 @@
         visibility          = "custom [group:raid] show; hide",
         showPlayer          = true,  --make this true to show player in party
         showSolo            = false,  --make this true to show while solo (only works if solo is in visiblity aswell
-        showParty           = false,  --make this true to show raid in party
+        showParty           = true,  --make this true to show raid in party
         showRaid            = true,   --show in raid
         point               = "TOP",
         yOffset             = 15,

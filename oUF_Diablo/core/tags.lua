@@ -76,6 +76,21 @@
   oUF.Tags.Events["diablo:name"] = "UNIT_NAME_UPDATE UNIT_HEALTH UNIT_MAXHEALTH UNIT_CONNECTION"
 
   ---------------------------------------------
+  
+  --status tag
+  oUF.Tags.Methods["diablo:status"] = function(unit, rolf)
+    local color = oUF.Tags.Methods["diablo:colorsimple"](unit)
+    local status
+	if UnitIsDeadOrGhost(unit) then
+		status = "Dead"
+	elseif not UnitIsConnected(unit) then
+		status = "Offline"
+	end
+    return "|cff"..color..(status or "").."|r"
+  end
+  oUF.Tags.Events["diablo:status"] = "UNIT_HEALTH UNIT_MAXHEALTH UNIT_CONNECTION"
+
+  ---------------------------------------------
 
   --hp value
   oUF.Tags.Methods["diablo:hpval"] = function(unit)
@@ -355,11 +370,18 @@
   ---------------------------------------------
 
   --perphp - hp percent with %
-  oUF.Tags.Methods["perphp"] = function(unit)
-    local val = oUF.Tags.Methods["perhp"](unit).."%"
-    return val or ""
-  end
-  oUF.Tags.Events["perphp"] = "UNIT_HEALTH UNIT_MAXHEALTH UNIT_CONNECTION"
+	oUF.Tags.Methods["perphp"] = function(unit)
+	local perphp
+if UnitIsDeadOrGhost(unit) then
+      perphp = "Dead"
+    elseif not UnitIsConnected(unit) then
+      perphp = "Offline"
+    else
+      perphp = oUF.Tags.Methods["perhp"](unit).."%"
+	end
+	return perphp or ""
+end
+	oUF.Tags.Events["perphp"] = "UNIT_HEALTH UNIT_MAXHEALTH UNIT_CONNECTION"
 
   ---------------------------------------------
 
