@@ -5,8 +5,7 @@
 
   --  A Diablo themed unitframe layout for oUF 1.6.x
   --  Galaxy - 2015
-  --  Version 1.4.0
-
+  --  Version 1.5.0
   ---------------------------------------------
 
   --get the addon namespace
@@ -60,7 +59,7 @@
         show = true,
         smooth = true,
       },
-      healprediction = { -- WIP, Not yet ready for implementation
+      healprediction = { --WIP
         show = false,
         color = {
           myself  = {r = 0, g = 1, b = 0, a = 1 },
@@ -615,7 +614,7 @@
       alpha = {
         notinrange = 0.4,
       },
-      scale = 1.2,
+      scale = .98,
       pos = { a1 = "TOPLEFT", a2 = "TOPLEFT", af = "UIParent", x = 5, y = -5 },
       health = {
         texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar128_3",

@@ -214,9 +214,16 @@
     local d = floor(min/max*100)
     local color
     local dead
-    if UnitIsDeadOrGhost(unit) or not UnitIsConnected(unit) then
+	local offline
+
+    if unit and UnitIsTapped(unit) and not UnitIsTappedByPlayer(unit) then
+      color = {r = 0.65, g = 0.65, b = 0.65}
+    elseif UnitIsDeadOrGhost(unit) then
       color = {r = 0.4, g = 0.4, b = 0.4}
       dead = 1
+	elseif not UnitIsConnected(unit) then
+		color = {r = 0.4, g = 0.4, b = 0.4}
+		offline = 1
     elseif not cfg.colorswitcher.classcolored then
       color = cfg.colorswitcher.bright
     elseif cfg.colorswitcher.threatColored and unit and UnitThreatSituation(unit) == 3 then
@@ -228,9 +235,9 @@
     end
     if not color then color = { r = 0.5, g = 0.5, b = 0.5, } end
     --dead
-    if dead == 1 then
-      bar:SetStatusBarColor(0,0,0,0)
-      bar.bg:SetVertexColor(0,0,0,0)
+    if offline == 1 then
+		bar:SetStatusBarColor(0.4, 0.4, 0.4, 0.4)
+		bar.glow:SetVertexColor(0, 0, 0, 0)
     else
       --alive
       if cfg.colorswitcher.useBrightForeground then
@@ -242,7 +249,7 @@
       end
     end
     --low hp
-    if d <= 25 and dead ~= 1 then
+    if d <= 25 or dead == 1 then
       if cfg.colorswitcher.useBrightForeground then
         bar.glow:SetVertexColor(0.3,0,0,0.9)
         bar:SetStatusBarColor(1,0,0,1)
@@ -437,16 +444,15 @@
 
     local attr = cfg.units.raid.attributes
 
-    local raidDragFrame = CreateFrame("Frame", "oUF_DiabloRaidDragFrame", UIParent)
+    
+    local groups, group = {}, nil
+    for i=1, NUM_RAID_GROUPS do
+      local name = "oUF_DiabloRaidGroup"..i
+	local raidDragFrame = CreateFrame("Frame", "oUF_DiabloRaidDragFrame"..i, UIParent)
     raidDragFrame:SetSize(50,50)
     raidDragFrame:SetPoint(cfg.units.raid.pos.a1,cfg.units.raid.pos.af,cfg.units.raid.pos.a2,cfg.units.raid.pos.x,cfg.units.raid.pos.y)
     func.applyDragFunctionality(raidDragFrame)
-    table.insert(oUF_Diablo_Units,"oUF_DiabloRaidDragFrame") --add frames to the slash command function
-
-    local groups, group = {}, nil
-    
-    for i=1, NUM_RAID_GROUPS do
-      local name = "oUF_DiabloRaidGroup"..i
+    table.insert(oUF_Diablo_Units,"oUF_DiabloRaidDragFrame"..i) --add frames to the slash command function
       group = oUF:SpawnHeader(
         name,
         nil,
@@ -468,37 +474,7 @@
           self:SetHeight(%d)
         ]]):format(128, 64)
       )
-      if i == 1 then
-        group:SetPoint("TOPLEFT",raidDragFrame,0,0)
-      else
-        if attr.columnAnchorPoint == "TOP" then
-          group:SetPoint("TOPLEFT", groups[i-1], "BOTTOMLEFT", 0, attr.columnSpacing)
-        elseif attr.columnAnchorPoint == "BOTTOM" then
-          group:SetPoint("BOTTOMLEFT", groups[i-1], "TOPLEFT", 0, attr.columnSpacing)
-        elseif attr.columnAnchorPoint == "LEFT" then
-          group:SetPoint("TOPLEFT", groups[i-1], "TOPRIGHT", attr.columnSpacing, 0)
-        else
-          group:SetPoint("TOPRIGHT", groups[i-1], "TOPLEFT", attr.columnSpacing, 0)
-        end
-      end
-      groups[i] = group
+		group:SetPoint("TOPLEFT", raidDragFrame, 0, 0)		
+		groups[i] = group
     end
-	
-	local updateRaidScale = CreateFrame("Frame")
-    updateRaidScale:RegisterEvent("GROUP_ROSTER_UPDATE")
-    updateRaidScale:RegisterEvent("PLAYER_ENTERING_WORLD")
-    updateRaidScale:SetScript("OnEvent", function(self)
-      if(InCombatLockdown()) then
-        self:RegisterEvent("PLAYER_REGEN_ENABLED")
-      else
-        self:UnregisterEvent("PLAYER_REGEN_ENABLED")
-        local num = GetNumGroupMembers()
-        local scale = (100-num)/100*cfg.units.raid.scale
-        for idx, group in pairs(groups) do
-          if group then
-            group:SetScale(scale)
-          end
-        end
-      end
-    end)    
   end
