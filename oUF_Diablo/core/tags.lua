@@ -38,7 +38,7 @@
     --happiness removed in 4.1
     --elseif UnitIsUnit(unit, "pet") and GetPetHappiness() then
       --color = cfg.happycolors[GetPetHappiness()]
-    elseif UnitIsUnit(unit, "target") and UnitIsTapped("target") and not UnitIsTappedByPlayer("target") then
+    elseif UnitIsUnit(unit, "target") and UnitIsTapDenied("target") then
       color = {r = 0.5, g = 0.5, b = 0.5}
     else
       color = FACTION_BAR_COLORS[UnitReaction(unit, "player")]

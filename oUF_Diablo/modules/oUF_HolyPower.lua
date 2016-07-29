@@ -3,10 +3,10 @@ if select(2, UnitClass("player")) ~= "PALADIN" then return end
 local parent, ns = ...
 local oUF = ns.oUF or oUF
 
+
 local SPELL_POWER_HOLY_POWER = SPELL_POWER_HOLY_POWER
 
 local Update = function(self, event, unit, powerType)
-  if(self.unit ~= unit or (powerType and powerType ~= "HOLY_POWER")) then return end
   local bar = self.HolyPowerBar
   local num = UnitPower(unit, SPELL_POWER_HOLY_POWER)
   local max = UnitPowerMax(unit, SPELL_POWER_HOLY_POWER)
@@ -58,11 +58,12 @@ local Visibility = function(self, event, unit)
     or ((HasVehicleActionBar() and UnitVehicleSkin("player") and UnitVehicleSkin("player") ~= "")
     or (HasOverrideActionBar() and GetOverrideBarSkin() and GetOverrideBarSkin() ~= ""))
   then
-    --print(event.." one of the vehicle conditions is triggered, holypowerbar will hide now")
     bar:Hide()
-  else
+  elseif (GetSpecialization() == 3) then
     bar:Show()
     element.ForceUpdate(element)
+  else
+    bar:Hide()
   end
 end
 

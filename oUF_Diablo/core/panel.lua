@@ -1179,13 +1179,13 @@
   panel.elementHealthOrbHighlightAlpha = createSliderHealthOrbHighlightAlpha(panel.scrollFrame.scrollChild)
   panel.elementPowerOrbHighlightAlpha = createSliderPowerOrbHighlightAlpha(panel.scrollFrame.scrollChild)
   --create galaxies headline
-  panel.elementHealthGalaxiesHeadline = createBasicFontString(panel.scrollFrame.scrollChild,nil,nil,"GameFontNormalLarge","Rotating galaxies")
-  createTooltipButton(panel.scrollFrame.scrollChild,panel.elementHealthGalaxiesHeadline,"The following option allows you to adjust the opacity of the rotating galaxy textures.")
-  panel.elementPowerGalaxiesHeadline = createBasicFontString(panel.scrollFrame.scrollChild,nil,nil,"GameFontNormalLarge","Rotating galaxies")
-  createTooltipButton(panel.scrollFrame.scrollChild,panel.elementPowerGalaxiesHeadline,"The following option allows you to adjust the opacity of the rotating galaxy textures.")
+--  panel.elementHealthGalaxiesHeadline = createBasicFontString(panel.scrollFrame.scrollChild,nil,nil,"GameFontNormalLarge","Rotating galaxies")
+--  createTooltipButton(panel.scrollFrame.scrollChild,panel.elementHealthGalaxiesHeadline,"The following option allows you to adjust the opacity of the rotating galaxy textures.")
+--  panel.elementPowerGalaxiesHeadline = createBasicFontString(panel.scrollFrame.scrollChild,nil,nil,"GameFontNormalLarge","Rotating galaxies")
+--  createTooltipButton(panel.scrollFrame.scrollChild,panel.elementPowerGalaxiesHeadline,"The following option allows you to adjust the opacity of the rotating galaxy textures.")
   --create galaxies alpha slider
-  panel.elementHealthOrbGalaxiesAlpha = createSliderHealthOrbGalaxiesAlpha(panel.scrollFrame.scrollChild)
-  panel.elementPowerOrbGalaxiesAlpha = createSliderPowerOrbGalaxiesAlpha(panel.scrollFrame.scrollChild)
+--  panel.elementHealthOrbGalaxiesAlpha = createSliderHealthOrbGalaxiesAlpha(panel.scrollFrame.scrollChild)
+--  panel.elementPowerOrbGalaxiesAlpha = createSliderPowerOrbGalaxiesAlpha(panel.scrollFrame.scrollChild)
   --create spark headline
   panel.elementHealthSparkHeadline = createBasicFontString(panel.scrollFrame.scrollChild,nil,nil,"GameFontNormalLarge","Spark Texture")
   createTooltipButton(panel.scrollFrame.scrollChild,panel.elementHealthSparkHeadline,"The following option allows you to adjust the opacity of the spark texture.\n|cFFFFFFFFThe texture helps blending the filling texture.")
@@ -1326,14 +1326,14 @@
   panel.elementHealthOrbHighlightAlpha:SetPoint("TOPLEFT", panel.elementHealthHighlightHeadline, "BOTTOMLEFT", 0, -20)
   panel.elementPowerOrbHighlightAlpha:SetPoint("TOPLEFT", panel.elementPowerHighlightHeadline, "BOTTOMLEFT", 0, -20)
   --position galaxies headline
-  panel.elementHealthGalaxiesHeadline:SetPoint("TOPLEFT", panel.elementHealthHighlightHeadline, "BOTTOMLEFT", 0, -60)
-  panel.elementPowerGalaxiesHeadline:SetPoint("TOPLEFT", panel.elementPowerHighlightHeadline, "BOTTOMLEFT", 0, -60)
+--  panel.elementHealthGalaxiesHeadline:SetPoint("TOPLEFT", panel.elementHealthHighlightHeadline, "BOTTOMLEFT", 0, -60)
+--  panel.elementPowerGalaxiesHeadline:SetPoint("TOPLEFT", panel.elementPowerHighlightHeadline, "BOTTOMLEFT", 0, -60)
   --position galaxies alpha slider
-  panel.elementHealthOrbGalaxiesAlpha:SetPoint("TOPLEFT", panel.elementHealthGalaxiesHeadline, "BOTTOMLEFT", 0, -20)
-  panel.elementPowerOrbGalaxiesAlpha:SetPoint("TOPLEFT", panel.elementPowerGalaxiesHeadline, "BOTTOMLEFT", 0, -20)
+--  panel.elementHealthOrbGalaxiesAlpha:SetPoint("TOPLEFT", panel.elementHealthGalaxiesHeadline, "BOTTOMLEFT", 0, -20)
+--  panel.elementPowerOrbGalaxiesAlpha:SetPoint("TOPLEFT", panel.elementPowerGalaxiesHeadline, "BOTTOMLEFT", 0, -20)
   --position spark headline
-  panel.elementHealthSparkHeadline:SetPoint("TOPLEFT", panel.elementHealthGalaxiesHeadline, "BOTTOMLEFT", 0, -60)
-  panel.elementPowerSparkHeadline:SetPoint("TOPLEFT", panel.elementPowerGalaxiesHeadline, "BOTTOMLEFT", 0, -60)
+  panel.elementHealthSparkHeadline:SetPoint("TOPLEFT", panel.elementHealthHighlightHeadline, "BOTTOMLEFT", 0, -60)
+  panel.elementPowerSparkHeadline:SetPoint("TOPLEFT", panel.elementPowerHighlightHeadline, "BOTTOMLEFT", 0, -60)
   --position spark alpha slider
   panel.elementHealthOrbSparkAlpha:SetPoint("TOPLEFT", panel.elementHealthSparkHeadline, "BOTTOMLEFT", 0, -20)
   panel.elementPowerOrbSparkAlpha:SetPoint("TOPLEFT", panel.elementPowerSparkHeadline, "BOTTOMLEFT", 0, -20)
@@ -1836,12 +1836,12 @@
 
   --update element health orb galxies alpha
   panel.updateElementHealthOrbGalaxiesAlpha = function()
-    panel.elementHealthOrbGalaxiesAlpha:SetValue(panel.loadHealthOrbGalaxiesAlpha() or 0)
+--    panel.elementHealthOrbGalaxiesAlpha:SetValue(panel.loadHealthOrbGalaxiesAlpha() or 0)
   end
 
   --update element power orb galxies alpha
   panel.updateElementPowerOrbGalaxiesAlpha = function()
-    panel.elementPowerOrbGalaxiesAlpha:SetValue(panel.loadPowerOrbGalaxiesAlpha() or 0)
+--    panel.elementPowerOrbGalaxiesAlpha:SetValue(panel.loadPowerOrbGalaxiesAlpha() or 0)
   end
   
   --update element health orb spark alpha

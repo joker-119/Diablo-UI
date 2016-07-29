@@ -3,13 +3,12 @@ if select(2, UnitClass("player")) ~= "WARLOCK" then return end
 local parent, ns = ...
 local oUF = ns.oUF or oUF
 
+
+
 local SPELL_POWER_SOUL_SHARDS     = SPELL_POWER_SOUL_SHARDS
-local SPEC_WARLOCK_AFFLICTION     = SPEC_WARLOCK_AFFLICTION
+
 
 local Update = function(self, event, unit, powerType)
-  if(self.unit ~= unit or (powerType and powerType ~= "SOUL_SHARDS")) then return end
-  --other warlock powers will fire even in another spec, double check for spec
-  if(GetSpecialization() ~= SPEC_WARLOCK_AFFLICTION) then return end
   local bar = self.SoulShardPowerBar
   local cur = UnitPower(unit, SPELL_POWER_SOUL_SHARDS)
   local max = UnitPowerMax(unit, SPELL_POWER_SOUL_SHARDS)
@@ -22,7 +21,7 @@ local Update = function(self, event, unit, powerType)
   end
   ]]
   --adjust the width of the soulshard power frame
-  local w = 64*(max+2)
+  local w = 64*(max+1)
   bar:SetWidth(w)
   for i = 1, bar.maxOrbs do
     local orb = self.SoulShards[i]
@@ -63,7 +62,7 @@ local Visibility = function(self, event, unit)
     or (HasOverrideActionBar() and GetOverrideBarSkin() and GetOverrideBarSkin() ~= ""))
   then
     bar:Hide()
-  elseif(GetSpecialization() == SPEC_WARLOCK_AFFLICTION) then
+  elseif(select(2, UnitClass("player")) == "WARLOCK") then
     bar:Show()
     element.ForceUpdate(element)
   else

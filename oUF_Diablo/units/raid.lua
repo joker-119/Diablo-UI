@@ -125,13 +125,11 @@
       }
     elseif cfg.playerclass == "PALADIN" then
       spellIDs = {
-        148039, -- Sacred Shield
+        223306, -- Bestow Faith
         53563, -- Beacon of Light
-		86273, -- Illuminated Healing
-        6940, -- Hand of Sacrifice
-        114039, -- Hand of Purity
+        6940, -- Blessing of Sacrifice
         156910, -- Beacon of Faith
-		157007, -- Beacon of Insight
+		200025, -- Beacon of Virtue
       }
 	elseif cfg.playerclass == "DRUID" then
 		spellIDs = {
@@ -141,7 +139,7 @@
 		102342, -- Ironback
 		102351, -- Cenarion Ward
 		48438, -- Wild Growth
-		162359, -- Genesis
+		155777, -- Germination
 		}
 	elseif cfg.playerclass == "SHAMAN" then
 		spellIDs = {
@@ -216,7 +214,7 @@
     local dead
 	local offline
 
-    if unit and UnitIsTapped(unit) and not UnitIsTappedByPlayer(unit) then
+    if unit and UnitIsTapDenied(unit) then
       color = {r = 0.65, g = 0.65, b = 0.65}
     elseif UnitIsDeadOrGhost(unit) then
       color = {r = 0.4, g = 0.4, b = 0.4}

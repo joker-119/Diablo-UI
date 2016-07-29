@@ -184,7 +184,7 @@
     local offset = orb.size-per*orb.size/100
     orb.scrollFrame:SetPoint("TOP",0,-offset)
     orb.scrollFrame:SetVerticalScroll(offset)
-    --adjust the orb spark in width/height matching the current scrollframe state
+   --adjust the orb spark in width/height matching the current scrollframe state
     if not orb.spark then return end
     local multiplier = floor(sin(per/100*pi)*1000)/1000
     if multiplier <= 0.25 then
@@ -197,21 +197,7 @@
     end
   end
 
-  --create galaxy func
-  local createGalaxy = function(frame,type,x,y,size,duration,texture,sublevel)
-    local t = frame:CreateTexture(nil, "BACKGROUND", nil, sublevel)
-    t:SetSize(size,size)
-    t:SetPoint("CENTER",x,y)
-    t:SetTexture("Interface\\AddOns\\oUF_Diablo\\media\\"..texture)
-    t:SetBlendMode("ADD")
-    t.ag = t:CreateAnimationGroup()
-    t.ag.anim = t.ag:CreateAnimation("Rotation")
-    t.ag.anim:SetDegrees(360)
-    t.ag.anim:SetDuration(duration)
-    t.ag:Play()
-    t.ag:SetLooping("REPEAT")
-    return t
-  end
+
   
   --create orb func
   local createOrb = function(self,type)
@@ -307,13 +293,13 @@
     orb.model = model
     
     --galaxies
-    orb.galaxies = {}
-    tinsert(orb.galaxies, createGalaxy(scrollChild,orb.type,0,0,orb.size-0,120,"galaxy2",-8))
-    tinsert(orb.galaxies, createGalaxy(scrollChild,orb.type,0,-2,orb.size-20,90,"galaxy",-7))
-    tinsert(orb.galaxies, createGalaxy(scrollChild,orb.type,0,-4,orb.size-5,60,"galaxy4",-6))
-    for i, galaxy in pairs(orb.galaxies) do
-      galaxy:SetVertexColor(orbcfg.filling.color.r,orbcfg.filling.color.g,orbcfg.filling.color.b)
-    end
+--    orb.galaxies = {}
+--    tinsert(orb.galaxies, createGalaxy(scrollChild,orb.type,0,0,orb.size-0,120,"galaxy2",-8))
+--    tinsert(orb.galaxies, createGalaxy(scrollChild,orb.type,0,-2,orb.size-20,90,"galaxy",-7))
+--   tinsert(orb.galaxies, createGalaxy(scrollChild,orb.type,0,-4,orb.size-5,60,"galaxy4",-6))
+--    for i, galaxy in pairs(orb.galaxies) do
+--      galaxy:SetVertexColor(orbcfg.filling.color.r,orbcfg.filling.color.g,orbcfg.filling.color.b)
+--    end
 
     --overlay frame
     local overlay = CreateFrame("Frame","$parentOverlay",scrollFrame)
@@ -509,14 +495,8 @@
     end
 
     --warlock bars
-    if cfg.playerclass == "WARLOCK" and self.cfg.demonicfury.show then
-      bars.createDemonicFuryPowerBar(self)
-    end
     if cfg.playerclass == "WARLOCK" and self.cfg.soulshards.show then
       bars.createSoulShardPowerBar(self)
-    end
-    if cfg.playerclass == "WARLOCK" and self.cfg.burningembers.show then
-      bars.createBurningEmberPowerBar(self)
     end
 
     --holypower
@@ -527,16 +507,6 @@
     --harmony
     if cfg.playerclass == "MONK" and self.cfg.harmony.show then
       bars.createHarmonyPowerBar(self)
-    end
-
-    --shadoworbs
-    if cfg.playerclass == "PRIEST" and self.cfg.shadoworbs.show then
-      bars.createShadowOrbPowerBar(self)
-    end
-
-    --eclipsebar
-    if cfg.playerclass == "DRUID" and self.cfg.eclipse.show then
-      bars.createEclipseBar(self)
     end
 
     --runes
