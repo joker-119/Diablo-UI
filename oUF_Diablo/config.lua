@@ -5,7 +5,7 @@
 
   --  A Diablo themed unitframe layout for oUF 1.6.x
   --  Galaxy - 2016
-  --  Version 1.5.2
+  --  Version 1.5.3
   ---------------------------------------------
 
   --get the addon namespace
@@ -127,7 +127,7 @@
         },
       },
       runes = { --class bar DK
-        show = false,
+        show = true,
         scale = 0.40,
         pos = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 650 },
         combat          = { --fade the bar in/out in combat/out of combat
