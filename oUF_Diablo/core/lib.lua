@@ -307,7 +307,6 @@ func.createAuraWatch = function(self)
            
     elseif cfg.playerclass == "SHAMAN" then --Shaman
         spellIDs = {
-		974, -- Earth Shield
 		61295, -- Riptide
 		}
     else -- Non-Healer

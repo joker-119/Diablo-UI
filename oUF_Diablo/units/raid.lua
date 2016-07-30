@@ -143,7 +143,6 @@
 		}
 	elseif cfg.playerclass == "SHAMAN" then
 		spellIDs = {
-		974, -- Earth Shield
 		61295, -- Riptide
 		}
 	elseif cfg.playerclass == "MONK" then
