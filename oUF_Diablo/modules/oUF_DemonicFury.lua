@@ -3,15 +3,16 @@ if select(2, UnitClass("player")) ~= "WARLOCK" then return end
 local parent, ns = ...
 local oUF = ns.oUF or oUF
 
-
-
-local SPELL_POWER_SOUL_SHARDS     = SPELL_POWER_SOUL_SHARDS
-
+local SPELL_POWER_DEMONIC_FURY    = SPELL_POWER_DEMONIC_FURY
+local SPEC_WARLOCK_DEMONOLOGY     = SPEC_WARLOCK_DEMONOLOGY
 
 local Update = function(self, event, unit, powerType)
-  local bar = self.SoulShardPowerBar
-  local cur = UnitPower(unit, SPELL_POWER_SOUL_SHARDS)
-  local max = UnitPowerMax(unit, SPELL_POWER_SOUL_SHARDS)
+  if(self.unit ~= unit or (powerType and powerType ~= "DEMONIC_FURY")) then return end
+  --other warlock powers will fire even in another spec, double check for spec
+  if(GetSpecialization() ~= SPEC_WARLOCK_DEMONOLOGY) then return end
+  local bar = self.DemonicFuryPowerBar
+  local cur = UnitPower(unit, SPELL_POWER_DEMONIC_FURY)
+  local max = UnitPowerMax(unit, SPELL_POWER_DEMONIC_FURY)
   --[[ --do not hide the bar when the value is empty, keep it visible
   if cur < 1 then
     if bar:IsShown() then bar:Hide() end
@@ -20,49 +21,30 @@ local Update = function(self, event, unit, powerType)
     if not bar:IsShown() then bar:Show() end
   end
   ]]
-  --adjust the width of the soulshard power frame
-  local w = 64*(max+1)
-  bar:SetWidth(w)
-  for i = 1, bar.maxOrbs do
-    local orb = self.SoulShards[i]
-    if i > max then
-       if orb:IsShown() then orb:Hide() end
-    else
-      if not orb:IsShown() then orb:Show() end
-    end
+  local sb = self.DemonicFury[1]
+  sb:SetMinMaxValues(0, max)
+  sb:SetValue(cur)
+  if cur > 0 and sb.value then
+    sb.value:SetText(cur)
+  elseif sb.value then
+    sb.value:SetText("")
   end
-  for i = 1, bar.maxOrbs do
-    local orb = self.SoulShards[i]
-    local full = cur/max
-    if(i <= cur) then
-      if full == 1 then
-        orb.fill:SetVertexColor(1,0,0)
-        orb.glow:SetVertexColor(1,0,0)
-      else
-        orb.fill:SetVertexColor(bar.color.r,bar.color.g,bar.color.b)
-        orb.glow:SetVertexColor(bar.color.r,bar.color.g,bar.color.b)
-      end
-      orb.fill:Show()
-      orb.glow:Show()
-      orb.highlight:Show()
-    else
-      orb.fill:Hide()
-      orb.glow:Hide()
-      orb.highlight:Hide()
-    end
+  if cur/max == 1 then
+    sb.glow:Show()
+  else
+    sb.glow:Hide()
   end
-
 end
 
 local Visibility = function(self, event, unit)
-  local element = self.SoulShards
-  local bar = self.SoulShardPowerBar
+  local element = self.DemonicFury
+  local bar = self.DemonicFuryPowerBar
   if UnitHasVehicleUI("player")
     or ((HasVehicleActionBar() and UnitVehicleSkin("player") and UnitVehicleSkin("player") ~= "")
     or (HasOverrideActionBar() and GetOverrideBarSkin() and GetOverrideBarSkin() ~= ""))
   then
     bar:Hide()
-  elseif(select(2, UnitClass("player")) == "WARLOCK") then
+  elseif(GetSpecialization() == SPEC_WARLOCK_DEMONOLOGY) then
     bar:Show()
     element.ForceUpdate(element)
   else
@@ -70,16 +52,17 @@ local Visibility = function(self, event, unit)
   end
 end
 
+
 local Path = function(self, ...)
-  return (self.SoulShards.Override or Update) (self, ...)
+  return (self.DemonicFury.Override or Update) (self, ...)
 end
 
 local ForceUpdate = function(element)
-  return Path(element.__owner, "ForceUpdate", element.__owner.unit, "SOUL_SHARDS")
+  return Path(element.__owner, "ForceUpdate", element.__owner.unit, "DEMONIC_FURY")
 end
 
 local function Enable(self, unit)
-  local element = self.SoulShards
+  local element = self.DemonicFury
   if(element and unit == "player") then
     element.__owner = self
     element.ForceUpdate = ForceUpdate
@@ -101,7 +84,7 @@ local function Enable(self, unit)
 end
 
 local function Disable(self)
-  local element = self.SoulShards
+  local element = self.DemonicFury
   if(element) then
     self:UnregisterEvent("UNIT_POWER_FREQUENT", Path)
     self:UnregisterEvent("UNIT_DISPLAYPOWER", Path)
@@ -113,4 +96,4 @@ local function Disable(self)
   end
 end
 
-oUF:AddElement("SoulShards", Path, Enable, Disable)
+oUF:AddElement("DemonicFury", Path, Enable, Disable)

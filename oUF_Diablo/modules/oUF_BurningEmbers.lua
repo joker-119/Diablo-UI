@@ -3,66 +3,80 @@ if select(2, UnitClass("player")) ~= "WARLOCK" then return end
 local parent, ns = ...
 local oUF = ns.oUF or oUF
 
-
-
-local SPELL_POWER_SOUL_SHARDS     = SPELL_POWER_SOUL_SHARDS
-
+local MAX_POWER_PER_EMBER = 10
+local SPELL_POWER_BURNING_EMBERS  = SPELL_POWER_BURNING_EMBERS
+local SPEC_WARLOCK_DESTRUCTION    = SPEC_WARLOCK_DESTRUCTION
 
 local Update = function(self, event, unit, powerType)
-  local bar = self.SoulShardPowerBar
-  local cur = UnitPower(unit, SPELL_POWER_SOUL_SHARDS)
-  local max = UnitPowerMax(unit, SPELL_POWER_SOUL_SHARDS)
+  if(self.unit ~= unit or (powerType and powerType ~= "BURNING_EMBERS")) then return end
+  --other warlock powers will fire even in another spec, double check for spec
+  if(GetSpecialization() ~= SPEC_WARLOCK_DESTRUCTION) then return end
+  local bar = self.BurningEmberPowerBar
+  local cur = UnitPower(unit, SPELL_POWER_BURNING_EMBERS)
+  local max = UnitPowerMax(unit, SPELL_POWER_BURNING_EMBERS)
+  local cur2 = UnitPower(unit, SPELL_POWER_BURNING_EMBERS, true)
+  local max2 = UnitPowerMax(unit, SPELL_POWER_BURNING_EMBERS, true)
+  local val = cur2-cur*MAX_POWER_PER_EMBER
+
   --[[ --do not hide the bar when the value is empty, keep it visible
-  if cur < 1 then
+  if cur2 < 1 then
     if bar:IsShown() then bar:Hide() end
     return
   else
     if not bar:IsShown() then bar:Show() end
   end
   ]]
-  --adjust the width of the soulshard power frame
-  local w = 64*(max+1)
+
+  --adjust the width of the burning ember power frame
+  local w = 64*(max+2)
   bar:SetWidth(w)
   for i = 1, bar.maxOrbs do
-    local orb = self.SoulShards[i]
+    local orb = self.BurningEmbers[i]
     if i > max then
        if orb:IsShown() then orb:Hide() end
     else
       if not orb:IsShown() then orb:Show() end
     end
   end
-  for i = 1, bar.maxOrbs do
-    local orb = self.SoulShards[i]
+  local valueApplied = false
+  for i = 1, max do
+    local orb = self.BurningEmbers[i]
     local full = cur/max
     if(i <= cur) then
       if full == 1 then
-        orb.fill:SetVertexColor(1,0,0)
+        orb:SetStatusBarColor(1,0,0)
         orb.glow:SetVertexColor(1,0,0)
       else
-        orb.fill:SetVertexColor(bar.color.r,bar.color.g,bar.color.b)
-        orb.glow:SetVertexColor(bar.color.r,bar.color.g,bar.color.b)
+        orb:SetStatusBarColor(0,1,0)
+        orb.glow:SetVertexColor(0,1,0)
+        --orb:SetStatusBarColor(bar.color.r,bar.color.g,bar.color.b)
+        --orb.glow:SetVertexColor(bar.color.r,bar.color.g,bar.color.b)
       end
-      orb.fill:Show()
       orb.glow:Show()
-      orb.highlight:Show()
+      orb:SetValue(MAX_POWER_PER_EMBER)
     else
-      orb.fill:Hide()
+      if not valueApplied then
+        orb:SetStatusBarColor(bar.color.r,bar.color.g,bar.color.b)
+        orb:SetValue(val)
+        valueApplied = true
+      else
+        orb:SetValue(0)
+      end
       orb.glow:Hide()
-      orb.highlight:Hide()
     end
   end
 
 end
 
 local Visibility = function(self, event, unit)
-  local element = self.SoulShards
-  local bar = self.SoulShardPowerBar
+  local element = self.BurningEmbers
+  local bar = self.BurningEmberPowerBar
   if UnitHasVehicleUI("player")
     or ((HasVehicleActionBar() and UnitVehicleSkin("player") and UnitVehicleSkin("player") ~= "")
     or (HasOverrideActionBar() and GetOverrideBarSkin() and GetOverrideBarSkin() ~= ""))
   then
     bar:Hide()
-  elseif(select(2, UnitClass("player")) == "WARLOCK") then
+  elseif(GetSpecialization() == SPEC_WARLOCK_DESTRUCTION) then
     bar:Show()
     element.ForceUpdate(element)
   else
@@ -71,15 +85,15 @@ local Visibility = function(self, event, unit)
 end
 
 local Path = function(self, ...)
-  return (self.SoulShards.Override or Update) (self, ...)
+  return (self.BurningEmbers.Override or Update) (self, ...)
 end
 
 local ForceUpdate = function(element)
-  return Path(element.__owner, "ForceUpdate", element.__owner.unit, "SOUL_SHARDS")
+  return Path(element.__owner, "ForceUpdate", element.__owner.unit, "BURNING_EMBERS")
 end
 
 local function Enable(self, unit)
-  local element = self.SoulShards
+  local element = self.BurningEmbers
   if(element and unit == "player") then
     element.__owner = self
     element.ForceUpdate = ForceUpdate
@@ -101,7 +115,7 @@ local function Enable(self, unit)
 end
 
 local function Disable(self)
-  local element = self.SoulShards
+  local element = self.BurningEmbers
   if(element) then
     self:UnregisterEvent("UNIT_POWER_FREQUENT", Path)
     self:UnregisterEvent("UNIT_DISPLAYPOWER", Path)
@@ -113,4 +127,4 @@ local function Disable(self)
   end
 end
 
-oUF:AddElement("SoulShards", Path, Enable, Disable)
+oUF:AddElement("BurningEmbers", Path, Enable, Disable)

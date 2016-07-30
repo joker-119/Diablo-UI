@@ -4,13 +4,13 @@ local parent, ns = ...
 local oUF = ns.oUF or oUF
 
 oUF.colors.runes = {
-  {1,0,0}, --blood
-  {0,1,0}, --unholy
+  {0,1,1}, --blood
+  {0,1,1}, --unholy
   {0,1,1}, --frost
   {1,0,1}, --death
 }
 
-local runemap = { 1, 2, 5, 6, 3, 4 }
+local runemap = { 1, 2, 3, 4, 5, 6 }
 
 local OnUpdate = function(self, elapsed)
   local duration = self.duration + elapsed
@@ -23,8 +23,9 @@ local OnUpdate = function(self, elapsed)
 end
 
 local UpdateType = function(self, event, rid, alt)
+
   local rune = self.RuneOrbs[runemap[rid]]
-  local colors = self.colors.runes[GetRuneType(rid) or alt]
+  local colors = self.colors.runes[alt]
   local r, g, b = colors[1], colors[2], colors[3]
   rune.fill:SetStatusBarColor(r, g, b)
   rune.glow:SetVertexColor(r, g, b)

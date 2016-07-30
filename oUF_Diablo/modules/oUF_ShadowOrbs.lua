@@ -1,40 +1,39 @@
-if select(2, UnitClass("player")) ~= "WARLOCK" then return end
+if select(2, UnitClass("player")) ~= "PRIEST" then return end
 
 local parent, ns = ...
 local oUF = ns.oUF or oUF
 
-
-
-local SPELL_POWER_SOUL_SHARDS     = SPELL_POWER_SOUL_SHARDS
-
+local SPELL_POWER_SHADOW_ORBS = SPELL_POWER_SHADOW_ORBS
+local SPEC_PRIEST_SHADOW = SPEC_PRIEST_SHADOW
 
 local Update = function(self, event, unit, powerType)
-  local bar = self.SoulShardPowerBar
-  local cur = UnitPower(unit, SPELL_POWER_SOUL_SHARDS)
-  local max = UnitPowerMax(unit, SPELL_POWER_SOUL_SHARDS)
+  if(self.unit ~= unit or (powerType and powerType ~= "SHADOW_ORBS")) then return end
+  local bar = self.ShadowOrbPowerBar
+  local num = UnitPower(unit, SPELL_POWER_SHADOW_ORBS)
+  local max = UnitPowerMax(unit, SPELL_POWER_SHADOW_ORBS)
   --[[ --do not hide the bar when the value is empty, keep it visible
-  if cur < 1 then
+  if num < 1 then
     if bar:IsShown() then bar:Hide() end
     return
   else
     if not bar:IsShown() then bar:Show() end
   end
   ]]
-  --adjust the width of the soulshard power frame
-  local w = 64*(max+1)
+  --adjust the width of the shadow orb power frame
+  local w = 64*(max+2)
   bar:SetWidth(w)
   for i = 1, bar.maxOrbs do
-    local orb = self.SoulShards[i]
+    local orb = self.ShadowOrbs[i]
     if i > max then
        if orb:IsShown() then orb:Hide() end
     else
       if not orb:IsShown() then orb:Show() end
     end
   end
-  for i = 1, bar.maxOrbs do
-    local orb = self.SoulShards[i]
-    local full = cur/max
-    if(i <= cur) then
+  for i = 1, max do
+    local orb = self.ShadowOrbs[i]
+    local full = num/max
+    if(i <= num) then
       if full == 1 then
         orb.fill:SetVertexColor(1,0,0)
         orb.glow:SetVertexColor(1,0,0)
@@ -51,18 +50,17 @@ local Update = function(self, event, unit, powerType)
       orb.highlight:Hide()
     end
   end
-
 end
 
 local Visibility = function(self, event, unit)
-  local element = self.SoulShards
-  local bar = self.SoulShardPowerBar
+  local element = self.ShadowOrbs
+  local bar = self.ShadowOrbPowerBar
   if UnitHasVehicleUI("player")
     or ((HasVehicleActionBar() and UnitVehicleSkin("player") and UnitVehicleSkin("player") ~= "")
     or (HasOverrideActionBar() and GetOverrideBarSkin() and GetOverrideBarSkin() ~= ""))
   then
     bar:Hide()
-  elseif(select(2, UnitClass("player")) == "WARLOCK") then
+  elseif(GetSpecialization() == SPEC_PRIEST_SHADOW) then
     bar:Show()
     element.ForceUpdate(element)
   else
@@ -71,15 +69,15 @@ local Visibility = function(self, event, unit)
 end
 
 local Path = function(self, ...)
-  return (self.SoulShards.Override or Update) (self, ...)
+  return (self.ShadowOrbs.Override or Update) (self, ...)
 end
 
 local ForceUpdate = function(element)
-  return Path(element.__owner, "ForceUpdate", element.__owner.unit, "SOUL_SHARDS")
+  return Path(element.__owner, "ForceUpdate", element.__owner.unit, "SHADOW_ORBS")
 end
 
 local function Enable(self, unit)
-  local element = self.SoulShards
+  local element = self.ShadowOrbs
   if(element and unit == "player") then
     element.__owner = self
     element.ForceUpdate = ForceUpdate
@@ -101,7 +99,7 @@ local function Enable(self, unit)
 end
 
 local function Disable(self)
-  local element = self.SoulShards
+  local element = self.ShadowOrbs
   if(element) then
     self:UnregisterEvent("UNIT_POWER_FREQUENT", Path)
     self:UnregisterEvent("UNIT_DISPLAYPOWER", Path)
@@ -113,4 +111,4 @@ local function Disable(self)
   end
 end
 
-oUF:AddElement("SoulShards", Path, Enable, Disable)
+oUF:AddElement("ShadowOrbs", Path, Enable, Disable)
