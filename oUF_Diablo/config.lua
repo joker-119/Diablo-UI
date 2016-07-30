@@ -5,7 +5,7 @@
 
   --  A Diablo themed unitframe layout for oUF 1.6.x
   --  Galaxy - 2016
-  --  Version 1.5.3
+  --  Version 1.5.4
   ---------------------------------------------
 
   --get the addon namespace
@@ -189,7 +189,7 @@
         bottomline = {
           show = true,
           pos = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = -5 },
-          scale = 1.2,
+          scale = 1,
         },
       },
       portrait = {

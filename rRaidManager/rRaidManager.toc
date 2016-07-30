@@ -1,5 +1,5 @@
 ## Interface: 60200
-## Author: zork
+## Author: Galaxy119
 ## Title: rRaidManager
 ## Notes: Simple toolbar for raid management
 
