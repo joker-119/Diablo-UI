@@ -31,7 +31,7 @@ local Update = function(self, event, unit, powerType)
       if not orb:IsShown() then orb:Show() end
     end
   end
-  for i = 1, bar.maxOrbs do
+  for i = 1, max do
     local orb = self.SoulShards[i]
     local full = cur/max
     if(i <= cur) then
