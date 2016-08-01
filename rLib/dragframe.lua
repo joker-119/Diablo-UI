@@ -68,7 +68,7 @@ function rLib:CreateDragFrame(frame, frames, inset, clamp)
   --overlay texture
   local t = df:CreateTexture(nil,"OVERLAY",nil,6)
   t:SetAllPoints(df)
-  t:SetColorTexture(1,1,1)
+  t:SetColorTexture(0,1,1)
   t:SetVertexColor(0,1,0)
   t:SetAlpha(0.3)
   df.texture = t

@@ -105,7 +105,7 @@ actionButtonConfig.hotkey = {
     {"TOPRIGHT", 0, 0 },
     {"TOPLEFT", 0, 0 },
   },
-  --alpha = 0,
+  alpha = 0,
 }
 
 --count

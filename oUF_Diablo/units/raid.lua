@@ -447,7 +447,23 @@
       local name = "oUF_DiabloRaidGroup"..i
 	local raidDragFrame = CreateFrame("Frame", "oUF_DiabloRaidDragFrame"..i, UIParent)
     raidDragFrame:SetSize(50,50)
-    raidDragFrame:SetPoint(cfg.units.raid.pos.a1,cfg.units.raid.pos.af,cfg.units.raid.pos.a2,cfg.units.raid.pos.x,cfg.units.raid.pos.y)
+    raidDragFrame:SetPoint(cfg.units.raid.pos.a1,cfg.units.raid.pos.af,cfg.units.raid.pos.a2,5,cfg.units.raid.pos.y)
+	if i == 2 then
+	raidDragFrame:SetPoint(cfg.units.raid.pos.a1,cfg.units.raid.pos.af,cfg.units.raid.pos.a2,5,-160)
+	elseif i == 3 then 
+	raidDragFrame:SetPoint(cfg.units.raid.pos.a1,cfg.units.raid.pos.af,cfg.units.raid.pos.a2,5,-160*2)
+	elseif i == 4 then 
+	raidDragFrame:SetPoint(cfg.units.raid.pos.a1,cfg.units.raid.pos.af,cfg.units.raid.pos.a2,5,-160*3)
+	elseif i == 5 then 
+	raidDragFrame:SetPoint(cfg.units.raid.pos.a1,cfg.units.raid.pos.af,cfg.units.raid.pos.a2,133,cfg.units.raid.pos.y)	
+	elseif i == 6 then 
+	raidDragFrame:SetPoint(cfg.units.raid.pos.a1,cfg.units.raid.pos.af,cfg.units.raid.pos.a2,133,-160)
+	elseif i == 7 then 
+	raidDragFrame:SetPoint(cfg.units.raid.pos.a1,cfg.units.raid.pos.af,cfg.units.raid.pos.a2,133,-160*2)
+	elseif i == 8 then 
+	raidDragFrame:SetPoint(cfg.units.raid.pos.a1,cfg.units.raid.pos.af,cfg.units.raid.pos.a2,133,-160*3)
+	
+	end
     func.applyDragFunctionality(raidDragFrame)
     table.insert(oUF_Diablo_Units,"oUF_DiabloRaidDragFrame"..i) --add frames to the slash command function
       group = oUF:SpawnHeader(

@@ -65,22 +65,22 @@ function rActionBar:CreateActionBar1(addonName,cfg)
   local buttonList = L:GetButtonList(cfg.buttonName, cfg.numButtons)
   local frame = L:CreateButtonFrame(cfg,buttonList)
   --_onstate-page state driver
-  for i, button in next, buttonList do
-    frame:SetFrameRef(cfg.buttonName..i, button)
-  end
-  frame:Execute(([[
-    buttons = table.new()
-    for i=1, %d do
-      table.insert(buttons, self:GetFrameRef("%s"..i))
-    end
-  ]]):format(cfg.numButtons, cfg.buttonName))
-  frame:SetAttribute("_onstate-page", [[
-    print("_onstate-page","index",newstate)
-    for i, button in next, buttons do
-      button:SetAttribute("actionpage", newstate)
-    end
-  ]])
-  RegisterStateDriver(frame, "page", "[overridebar]14;[shapeshift]13;[vehicleui]12;[possessbar]12;[bonusbar:5]11;[bonusbar:4]10;[bonusbar:3]9;[bonusbar:2]8;[bonusbar:1]7;[bar:6]6;[bar:5]5;[bar:4]4;[bar:3]3;[bar:2]2;1")
+--  for i, button in next, buttonList do
+--    frame:SetFrameRef(cfg.buttonName..i, button)
+--  end
+--  frame:Execute(([[
+--    buttons = table.new()
+--    for i=1, %d do
+--      table.insert(buttons, self:GetFrameRef("%s"..i))
+--    end
+--  ]]):format(cfg.numButtons, cfg.buttonName))
+--  frame:SetAttribute("_onstate-page", [[
+--    print("_onstate-page","index",newstate)
+--    for i, button in next, buttons do
+--      button:SetAttribute("actionpage", newstate)
+--    end
+--  ]])
+--  RegisterStateDriver(frame, "page", "[overridebar]14;[shapeshift]13;[vehicleui]12;[possessbar]12;[bonusbar:5]11;[bonusbar:4]10;[bonusbar:3]9;[bonusbar:2]8;[bonusbar:1]7;[bar:6]6;[bar:5]5;[bar:4]4;[bar:3]3;[bar:2]2;1")
 end
 
 --Bar2

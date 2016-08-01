@@ -46,7 +46,7 @@
       show = true,
       size = 150,
       scale = 1,
-      pos = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = -260, y = -9 },
+      pos = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = -300, y = -9 },
       health = {
         frequentUpdates = true,
         smooth = true,
@@ -178,12 +178,12 @@
         },
         angel = {
           show = true,
-          pos = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 270, y = 0 },
+          pos = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 315, y = 0 },
           scale = 1,
         },
         demon = {
           show = true,
-          pos = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = -265, y = 0 },
+          pos = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = -315, y = 0 },
           scale = 1,
         },
         bottomline = {
@@ -204,7 +204,7 @@
     target = {
       show = true,
       scale = 1.5,
-      pos = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 250 },
+      pos = { a1 = "TOP", a2 = "TOP", af = "UIParent", x = 0, y = -100 },
       health = {
 	frequentUpdates = true,
         texture = "Interface\\AddOns\\oUF_Diablo\\media\\statusbar256_3",
@@ -277,7 +277,7 @@
           shieldbar = { r = 0.5, g = 0.5, b = 0.5, a = 1, }, --the castbar color while target casting a shielded spell
           shieldbg = { r = 0.1, g = 0.1, b = 0.1, a = 0.7, },  --the castbar background color while target casting a shielded spell
         },
-        pos = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 350 },
+        pos = { a1 = "TOP", a2 = "TOP", af = "UIParent", x = 0, y = -230 },
       },
       portrait = {
         pos = { a1 = "CENTER", a2 = "CENTER", af = "UIParent", x = 100, y = 0 },
@@ -307,7 +307,7 @@
     targettarget = {
       show = true,
       scale = 1.3,
-      pos = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = -195, y = 250 },
+      pos = { a1 = "TOP", a2 = "TOP", af = "UIParent", x = -200, y = -120 },
       auras = {
         show = true,
         size = 22,
@@ -336,7 +336,7 @@
     pet = {
       show = true,
       scale = 0.85,
-      pos = { a1 = "LEFT", a2 = "LEFT", af = "UIParent", x = 10, y = -140 },
+      pos = { a1 = "RIGHT", a2 = "RIGHT", af = "UIParent", x = -30, y = -140 },
       auras = {
         show = true,
         size = 22,
@@ -385,7 +385,7 @@
     focus = {
       show = true,
       scale = 0.85,
-      pos = { a1 = "LEFT", a2 = "LEFT", af = "UIParent", x = 10, y = 40 },
+      pos = { a1 = "RIGHT", a2 = "RIGHT", af = "UIParent", x = -30, y = 40 },
       aurawatch = {
         show            = false,
         size            = 20,
@@ -495,7 +495,7 @@
         notinrange = 0.5,
       },
       scale = 1.1,
-      pos = { a1 = "TOPLEFT", a2 = "BOTTOMLEFT", af = "UIParent", x = 5, y = -7 },
+      pos = { a1 = "TOPLEFT", a2 = "TOPLEFT", af = "UIParent", x = 35, y = -40 },
       aurawatch = {
         show            = false,
         size            = 18,

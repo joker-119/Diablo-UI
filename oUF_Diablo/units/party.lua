@@ -219,7 +219,18 @@
     self:RegisterEvent("UNIT_THREAT_SITUATION_UPDATE", func.checkThreat)
 
   end
+  
+--------------------------------------------
+-- Drag Frame (time for hacks)
+--------------------------------------------
+local A, L = ...
+L.addonName     = A 
+L.dragFrames    = {}
+L.addonColor    = "00FFFFFF"
+L.addonShortcut = "dparty"
 
+rLib:CreateDragFrame(frame, L.dragFrames, -2, true)
+rLib:CreateSlashCmd(L.addonName, L.addonShortcut, L.dragFrames, L.addonColor)
   ---------------------------------------------
   -- SPAWN PARTY UNIT
   ---------------------------------------------
@@ -229,6 +240,8 @@
     oUF:SetActiveStyle("diablo:party")
 
     local attr = cfg.units.party.attributes
+	
+	
 
     local partyDragFrame = CreateFrame("Frame", "oUF_DiabloPartyDragFrame", UIParent)
     partyDragFrame:SetSize(50,50)
