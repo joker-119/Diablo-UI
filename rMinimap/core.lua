@@ -19,7 +19,7 @@ L.addonShortcut   = "rmm"
 
 local cfg = {
   scale = 1,
-  point = { "TOPRIGHT", 0, 0},
+  point = { "TOPRIGHT", 0, -18},
 }
 
 -----------------------------

@@ -28,7 +28,7 @@
         size            = 26,
         margin          = 5,
       },
-      pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = -1, y = 22 },
+      pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = -1, y = 20 },
       userplaced      = {
         enable          = true,
       },
@@ -52,7 +52,7 @@
         size            = 57,
         margin          = 5,
       },
-      pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = -1, y = 22 },
+      pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = -1, y = 20 },
       userplaced      = {
         enable          = true,
       },
@@ -77,7 +77,7 @@
         size            = 26,
         margin          = 5,
       },
-      pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = -1, y = 53 },
+      pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = -1, y = 51 },
       userplaced      = {
         enable          = true,
       },
@@ -101,7 +101,7 @@
         size            = 26,
         margin          = 5,
       },
-      pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = -1, y = 92 },
+      pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = -1, y = 90 },
       userplaced      = {
         enable          = true,
       },
@@ -200,7 +200,7 @@
         size            = 26,
         margin          = 5,
       },
-      pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = -1, y = 140 },
+      pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = -70, y = 145 },
       userplaced      = {
         enable          = true,
       },
@@ -224,7 +224,7 @@
         size            = 36,
         margin          = 5,
       },
-      pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = -210, y = 135 },
+      pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = -210, y = 220 },
       userplaced      = {
         enable          = true,
       },

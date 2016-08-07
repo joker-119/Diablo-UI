@@ -212,7 +212,7 @@
 		fontSize = 7,
 		point = "RIGHT",
 		x = 25,
-		y = 20,
+		y = -25,
       },
 	  healper = {
 	frequentUpdates = true,
@@ -238,8 +238,8 @@
         tag = "[diablo:ppval]",
 		fontSize = 7,
 		point = "LEFT",
-		x = -20,
-		y = 20,
+		x = -25,
+		y = -25,
       },
 	  misc = {
 		classFontSize = 13,

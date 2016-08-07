@@ -15,7 +15,7 @@ local A, L = ...
 -----------------------------
 
 local buffFrameConfig = {
-  framePoint      = { "TOPRIGHT", Minimap, "TOPLEFT", -5, -5 },
+  framePoint      = { "TOPRIGHT", Minimap, "TOPLEFT", -5, -9 },
   frameScale      = 1,
   framePadding    = 5,
   buttonWidth     = 32,
@@ -32,7 +32,7 @@ local buffFrame = rBuffFrame:CreateBuffFrame(A, buffFrameConfig)
 -----------------------------
 
 local debuffFrameConfig = {
-  framePoint      = { "TOPRIGHT", buffFrame, "BOTTOMRIGHT", 0, -5 },
+  framePoint      = { "TOPRIGHT", buffFrame, "BOTTOMRIGHT", 0, -9 },
   frameScale      = 1,
   framePadding    = 5,
   buttonWidth     = 40,

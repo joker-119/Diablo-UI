@@ -40,11 +40,11 @@ end
     if not addon or not shortcut or not dragFrameList then return end
     local slashCmdFunction = function(cmd)
       if (cmd:match"unlock") then
-        rUnlockAllFrames(dragFrameList, addon..": frames unlocked")
+        L:UnlockFrames(dragFrameList, addon..": frames unlocked")
       elseif (cmd:match"lock") then
-        rLockAllFrames(dragFrameList, addon..": frames locked")
+        L:LockFrames(dragFrameList, addon..": frames locked")
       elseif (cmd:match"reset") then
-        rResetAllFramesToDefault(dragFrameList, addon..": frames reseted")
+        L:ResetFrames(dragFrameList, addon..": frames reseted")
       else
         print("|c"..(color or defaultColor)..addon.." command list:|r")
         print("|c"..(color or defaultColor).."\/"..shortcut.." lock|r, to lock all frames")
