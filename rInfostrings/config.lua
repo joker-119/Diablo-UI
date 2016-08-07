@@ -17,9 +17,9 @@
 
   cfg.frame = {
     scale           = 0.95,
-    pos             = { a1 = "TOP", af = Minimap, a2 = "BOTTOM", x = 0, y = -15 },
+    pos             = { a1 = "TOP", af = Minimap, a2 = "BOTTOM", x = 0, y = -25 },
     userplaced      = true, --want to place the bar somewhere else?
   }
 
-  cfg.showXpRep     = false --show xp or reputation as string
-  cfg.showMail      = false --show mail as text
+  cfg.showXpRep     = true --show xp or reputation as string
+  cfg.showMail      = true --show mail as text

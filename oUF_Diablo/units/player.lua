@@ -291,15 +291,6 @@
     model:SetScript("OnShow", function(self) self:Update() end)
     model:Update()
     orb.model = model
-    
-    --galaxies
---    orb.galaxies = {}
---    tinsert(orb.galaxies, createGalaxy(scrollChild,orb.type,0,0,orb.size-0,120,"galaxy2",-8))
---    tinsert(orb.galaxies, createGalaxy(scrollChild,orb.type,0,-2,orb.size-20,90,"galaxy",-7))
---   tinsert(orb.galaxies, createGalaxy(scrollChild,orb.type,0,-4,orb.size-5,60,"galaxy4",-6))
---    for i, galaxy in pairs(orb.galaxies) do
---      galaxy:SetVertexColor(orbcfg.filling.color.r,orbcfg.filling.color.g,orbcfg.filling.color.b)
---    end
 
     --overlay frame
     local overlay = CreateFrame("Frame","$parentOverlay",scrollFrame)

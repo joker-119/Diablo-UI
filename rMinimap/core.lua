@@ -69,7 +69,9 @@ QueueStatusMinimapButton:SetHighlightTexture (nil)
 QueueStatusMinimapButton:SetPushedTexture(nil)
 
 --garrison (DIEEEEEE!!!)
---GarrisonLandingPageMinimapButton
+GarrisonLandingPageMinimapButton:SetParent(Minimap)
+GarrisonLandingPageMinimapButton:SetScale(1)
+
 
 --mail
 MiniMapMailFrame:ClearAllPoints()
