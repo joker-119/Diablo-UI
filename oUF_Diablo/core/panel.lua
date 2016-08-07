@@ -96,7 +96,7 @@
     t:SetTexCoord(0,0.45,0.1640625,1)
     t:SetAlpha(0.5)
     local t2 = scrollFrame:CreateTexture(nil,"BACKGROUND",nil,-8)
-    t2:SetTexture(1,1,1)
+    t2:SetColorTexture(1,1,1)
     t2:SetVertexColor(0,0,0,0.3)
     t2:SetAllPoints(t)
     --create panel scroll child
@@ -106,7 +106,7 @@
     scrollChild:SetHeight(1020)
     --left background behind health orb settings
     local t = scrollChild:CreateTexture(nil,"BACKGROUND",nil,-4)
-    t:SetTexture(1,1,1)
+    t:SetColorTexture(1,1,1)
     t:SetVertexColor(1,0,0)
     t:SetAlpha(0.1)
     t:SetPoint("TOPLEFT")
@@ -115,7 +115,7 @@
     scrollChild.leftTexture = t
     --right background behind power settings
     local t = scrollChild:CreateTexture(nil,"BACKGROUND",nil,-4)
-    t:SetTexture(1,1,1)
+    t:SetColorTexture(1,1,1)
     t:SetVertexColor(0,0,1)
     t:SetAlpha(0.1)
     t:SetPoint("TOPRIGHT")
@@ -145,7 +145,7 @@
 
   local createHeadlineBackground = function(parent,headline)
     local t = parent:CreateTexture(nil,"BACKGROUND",nil,-2)
-    t:SetTexture(1,1,1)
+    t:SetColorTexture(1,1,1)
     --t:SetVertexColor(0,0,0,0.4)
     t:SetVertexColor(255,255,255,0.05)
     t:SetPoint("TOP",headline,0,4)
@@ -245,7 +245,7 @@
     --color:SetAllPoints(picker)
     color:SetPoint("TOPLEFT",4,-4)
     color:SetPoint("BOTTOMRIGHT",-4,4)
-    color:SetTexture(1,1,1)
+    color:SetColorTexture(1,1,1)
     picker.color = color
     picker.text = createBasicFontString(picker,nil,nil,"GameFontNormal",title)
     picker.text:SetTextColor(1,1,1)

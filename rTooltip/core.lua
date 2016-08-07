@@ -7,7 +7,7 @@
   --  Galaxy - 2016
 
   ---------------------------------------------
- 
+
   ---------------------------------------------
   --  CONFIG
   ---------------------------------------------
@@ -67,9 +67,9 @@
     if cursor and GetMouseFocus() == WorldFrame then
       tooltip:SetOwner(parent, "ANCHOR_CURSOR")
     else
-      tooltip:SetOwner(parent, "ANCHOR_NONE")
-      tooltip:ClearAllPoints()
-      tooltip:SetPoint(unpack(cfg.pos))
+      tooltip:SetOwner(parent, "ANCHOR_CURSOR")
+--      tooltip:ClearAllPoints()
+--      tooltip:SetPoint(unpack(cfg.pos))
     end
   end)
 

@@ -86,8 +86,6 @@
 local parent, ns = ...
 local oUF = ns.oUF
 
-local isBetaClient = select(4, GetBuildInfo()) >= 70000
-
 oUF.colors.health = {49/255, 207/255, 37/255}
 
 local Update = function(self, event, unit)
@@ -119,9 +117,7 @@ local Update = function(self, event, unit)
 	if(health.colorClass and arenaPrep) then
 		local _, _, _, _, _, _, class = GetSpecializationInfoByID(GetArenaOpponentSpec(self.id))
 		t = self.colors.class[class]
-	elseif(health.colorTapping and not UnitPlayerControlled(unit) and
-		(isBetaClient and UnitIsTapDenied(unit) or not isBetaClient and UnitIsTapped(unit) and
-		not UnitIsTappedByPlayer(unit) and not UnitIsTappedByAllThreatList(unit))) then
+	elseif(health.colorTapping and not UnitPlayerControlled(unit) and UnitIsTapDenied(unit)) then
 		t = self.colors.tapped
 	elseif(health.colorDisconnected and not UnitIsConnected(unit)) then
 		t = self.colors.disconnected

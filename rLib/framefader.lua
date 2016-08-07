@@ -109,6 +109,23 @@ function rLib:CreateFrameFader(frame, faderConfig)
   FrameHandler(frame)
 end
 
+  --rButtonBarFader func
+  function rButtonBarFader(frame,buttonList,fadeIn,fadeOut)
+    if not frame or not buttonList then return end
+    if not fadeIn then fadeIn = defaultFadeIn end
+    if not fadeOut then fadeOut = defaultFadeOut end
+    frame:EnableMouse(true)
+    frame:HookScript("OnEnter", function() UIFrameFadeIn( frame, fadeIn.time, frame:GetAlpha(), fadeIn.alpha) end)
+    frame:HookScript("OnLeave", function() UIFrameFadeOut(frame, fadeOut.time, frame:GetAlpha(), fadeOut.alpha) end)
+    UIFrameFadeOut(frame, fadeOut.time, frame:GetAlpha(), fadeOut.alpha)
+    for _, button in pairs(buttonList) do
+      if button then
+        button:HookScript("OnEnter", function() UIFrameFadeIn( frame, fadeIn.time, frame:GetAlpha(), fadeIn.alpha) end)
+        button:HookScript("OnLeave", function() UIFrameFadeOut(frame, fadeOut.time, frame:GetAlpha(), fadeOut.alpha) end)
+      end
+    end
+  end
+
 function rLib:CreateButtonFrameFader(frame, buttonList, faderConfig)
   rLib:CreateFrameFader(frame, faderConfig)
   for i, button in next, buttonList do

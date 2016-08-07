@@ -1,7 +1,0 @@
-## Interface: 70000
-## Author: zork
-## Title: rActionBar_Default
-## Notes: Default bar layout for rActionBar
-## RequiredDeps: rActionBar
-
-layout.lua
